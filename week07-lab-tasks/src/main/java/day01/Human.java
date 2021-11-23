@@ -5,26 +5,34 @@ import java.time.LocalDate;
 public class Human {
 
     private String name;
-    private LocalDate yearOfBirth;
+    private int yearOfBirth;
 
-    public Human(String name, LocalDate yearOfBirth) {
-        String[] nameSplit = name.split(" ");
-        if (nameSplit.length != 2) {
-            throw new IllegalArgumentException("Meg kell adnod a vezeték és a keresztnevdet is!");
+    public Human(String name, int yearOfBirth) {
+        if (isYearOfBirthValid(yearOfBirth) && isNameValid(name)) {
+            this.name = name;
+            this.yearOfBirth = yearOfBirth;
         }
-        LocalDate now =  LocalDate.now();
-        //if ((yearOfBirth) > 120) {
-           // throw new IllegalArgumentException("Nem jó születési évet adtál meg!");
-        //}
-        this.name = name;
-        this.yearOfBirth = yearOfBirth;
+    }
+
+    private boolean isYearOfBirthValid (int yearOfBirth) {
+        if (LocalDate.now().getYear() - yearOfBirth >= 120) {
+            throw new IllegalArgumentException("Nem jó születési évet adtál meg!");
+        }
+        return true;
+    }
+
+    public boolean isNameValid (String name) {
+        if(!(name != null && name.indexOf(" ") > 0)) {
+            throw new IllegalArgumentException("Meg kell adnod a vezeték és a keresztnevedet is!");
+        }
+        return true;
     }
 
     public String getName() {
         return name;
     }
 
-    public LocalDate getYearOfBirth() {
+    public int getYearOfBirth() {
         return yearOfBirth;
     }
 }
