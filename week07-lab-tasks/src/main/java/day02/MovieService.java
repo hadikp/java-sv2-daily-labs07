@@ -31,7 +31,7 @@ public class MovieService {
             filmList = Files.readAllLines(path);
         }
         catch (IOException ioe) {
-            ioe.printStackTrace();
+            throw new IllegalStateException("Dont read file", ioe);
         }
         return filmList;
     }
