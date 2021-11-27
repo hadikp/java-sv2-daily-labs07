@@ -8,10 +8,15 @@ import java.util.List;
 
 public class CourierFileManager {
 
-    public void createCourierByFile(Path path) {
+    public Courier createCourierByFile(Path path) {
+        Courier courierManager = new Courier();
         List<String> workList = readFile(path);
-        System.out.println(workList);
-
+        for (String st: workList) {
+            String[] workListSplit = st.split(" ");
+            Ride newRide = new Ride(Integer.parseInt(workListSplit[0]), Integer.parseInt(workListSplit[1]), Integer.parseInt(workListSplit[2]));
+            courierManager.addRide(newRide);
+        }
+        return courierManager;
     }
 
     private List<String> readFile(Path path) {
