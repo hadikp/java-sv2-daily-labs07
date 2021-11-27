@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,8 +29,10 @@ class CourierFileManagerTest {
 
     @Test
     void  testCreateCourierByFile() {
-        System.out.println(cfm.createCourierByFile(path).getRidesList());
-
+        List<Ride> rideList = cfm.createCourierByFile(path).getRidesList();
+        assertEquals(7, rideList.size());
+        assertEquals(1, rideList.get(1).getDayOfWeek());
+        assertEquals(2, rideList.get(3).getDayOfWeek());
     }
 
 }
